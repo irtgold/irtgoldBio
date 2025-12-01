@@ -1,167 +1,262 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRT GOLD - Professional Trading Education</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- TITLE + DESCRIPTION (ใช้ประโยคเดียวกันเพื่อ SEO) -->
-  <title>IRT GOLD</title>
-  <meta name="description" content="มองกราฟชัด จังหวะชัวร์ ด้วย IRT GOLD | คอร์สเรียน Private | สัญญาณ BUY–SELL เรียลไทม์" />
-  <meta name="robots" content="index,follow" />
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://irtgold.github.io/irtgold/" />
-  <meta property="og:title" content="IRT GOLD" />
-  <meta property="og:description" content="มองกราฟชัด จังหวะชัวร์ ด้วย IRT GOLD | คอร์สเรียน Private | สัญญาณ BUY–SELL เรียลไทม์" />
-  <!-- ใช้แบนเนอร์ใหม่ 1200x630 -->
-  <meta property="og:image" content="https://irtgold.github.io/irtgold/og-banner.png?v=1" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+        /* Background with blur effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d3561 50%, #1a1a2e 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -2;
+        }
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="IRT GOLD" />
-  <meta name="twitter:description" content="มองกราฟชัด จังหวะชัวร์ ด้วย IRT GOLD | คอร์สเรียน Private | สัญญาณ BUY–SELL เรียลไทม์" />
-  <meta name="twitter:image" content="https://irtgold.github.io/irtgold/og-banner.png?v=1" />
+        body::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 165, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+            z-index: -1;
+        }
 
-  <!-- Canonical -->
-  <link rel="canonical" href="https://irtgold.github.io/irtgold/" />
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&display=swap" rel="stylesheet" />
+        .container {
+            max-width: 420px;
+            width: 100%;
+        }
 
-  <style>
-    :root{ --bg:#0d1b3d; --panel:#142857; --panel-2:#1b2e5a; --brand:#ffd700; --text:#e9eefc; --muted:#b9c3e6; }
-    *{ box-sizing:border-box }
-    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:'Prompt',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif }
-    a{ color:inherit; text-decoration:none }
+        .profile-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 35px;
+            overflow: hidden;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
 
-    .wrap{ max-width:980px; margin-inline:auto; padding:24px }
-    .card{ background:var(--panel); border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,.25); overflow:hidden }
-    .center{ text-align:center }
-    .hero{ padding:28px 20px 24px }
-    .avatar{ width:180px; height:180px; border-radius:999px; border:6px solid var(--brand); object-fit:cover; display:block; margin:8px auto 18px }
-    .title{ font-weight:700; font-size:clamp(24px,4vw,36px); letter-spacing:.2px; margin:0; color:var(--brand) }
-    .subtitle{ margin:8px 0 0; color:var(--muted); font-weight:400 } /* <- ปรับเป็นตัวธรรมดา */
+        /* Profile Header with Image Background */
+        .profile-header {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%),
+                        linear-gradient(135deg, #c9a961 0%, #b8964f 100%);
+            padding: 50px 30px 30px;
+            text-align: center;
+            position: relative;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .social{ display:flex; gap:14px; justify-content:center; margin-top:16px }
-    .social a img{ width:40px; height:40px; border-radius:12px; object-fit:cover }
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2d2d44 0%, #1f1f2e 100%);
+            margin: 0 auto 15px;
+            border: 4px solid rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            color: #FFD700;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
 
-    /* แบนเนอร์ 3 รูปแบบยาว + คลิกได้ */
-    .featured{ margin:18px 0 }
-    .featured a{ display:block }
-    .featured img{
-      display:block; width:100%; height:auto; margin:0 0 16px; border-radius:12px;
-      box-shadow:0 8px 24px rgba(0,0,0,.25); transition:transform .15s ease, box-shadow .15s ease
-    }
-    .featured a:hover img{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.35) }
+        .profile-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
 
-    /* กล่องข้อมูล 3 อัน: บังคับเรียงลงมาเป็นคอลัมน์เดียวเสมอ */
-    .grid{ display:grid; grid-template-columns:1fr; gap:18px; padding:18px 0 }
-    @media(min-width:720px){ .grid{ grid-template-columns:1fr } }
-    .section{ background:var(--panel-2); border-radius:16px; padding:18px }
-    .section h3{ margin:0 0 10px; color:var(--brand) }
-    .grid .section{ margin:0 }
+        .profile-title {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+        }
 
-    .btn{ flex:1; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 16px; border:none; border-radius:14px; font-weight:700; font-size:16px; cursor:pointer }
-    .cta-bar{ position:fixed; inset:auto 16px 16px; display:flex; gap:12px; z-index:40 }
-    .btn.line{ background:var(--brand); color:#222 }
-    .btn.phone{ background:#2bd576; color:#0b2b1d }
-    .btn:hover{ filter:brightness(1.03) }
+        /* Main Button */
+        .main-button {
+            background: rgba(255, 250, 240, 0.98);
+            color: #2d2d44;
+            padding: 16px 30px;
+            border-radius: 25px;
+            margin: 25px 30px 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    footer{ color:var(--muted); font-size:13px; text-align:center; margin:18px 0 86px }
-  </style>
+        .main-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
 
-  <!-- JSON-LD (Schema.org) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "มองกราฟชัด จังหวะชัวร์ ด้วย IRT GOLD | คอร์สเรียน Private | สัญญาณ BUY–SELL เรียลไทม์",
-    "url": "https://irtgold.github.io/irtgold/",
-    "sameAs": [
-      "https://www.facebook.com/groups/irtgold",
-      "https://lin.ee/W2zLQNh",
-      "https://www.tiktok.com/@supphawat1499",
-      "https://youtube.com/@ldline-bank.w1994"
-    ]
-  }
-  </script>
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            color: #d4a960;
+            font-size: 13px;
+            font-weight: 600;
+            margin: 20px 30px 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Content Box with Image */
+        .content-box {
+            background: rgba(245, 235, 220, 0.5);
+            margin: 0 30px 20px;
+            padding: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            min-height: 220px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .content-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #e8dcc4 0%, #d4c4a8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #b8964f;
+            position: relative;
+        }
+
+        .content-image::before {
+            content: '📊';
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            font-size: 40px;
+            opacity: 0.6;
+        }
+
+        .content-image::after {
+            content: '💰';
+            position: absolute;
+            bottom: 25%;
+            right: 25%;
+            font-size: 35px;
+            opacity: 0.6;
+        }
+
+        /* Link Button */
+        .link-button {
+            background: rgba(255, 250, 240, 0.98);
+            color: #2d2d44;
+            padding: 16px 30px;
+            border-radius: 25px;
+            margin: 0 30px 30px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                max-width: 100%;
+            }
+
+            .profile-card {
+                border-radius: 25px;
+            }
+
+            .main-button,
+            .content-box,
+            .link-button,
+            .section-title {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+
+            .profile-name {
+                font-size: 22px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- HERO -->
-    <header class="card hero center">
-      <img class="avatar" src="profile.jpg.jpg" alt="Bank Supphawat" />
-      <h1 class="title">สร้างจังหวะให้การเทรด – แบงค์ ศุภวัสส์</h1>
-      <p class="subtitle">มองกราฟชัด จังหวะชัวร์ ด้วย IRT GOLD | คอร์สเรียน Private | สัญญาณ BUY–SELL เรียลไทม์</p>
+    <div class="container">
+        <div class="profile-card">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-image">IRT</div>
+                <div class="profile-name">IRT GOLD</div>
+                <div class="profile-title">Trading | Education | Investment</div>
+            </div>
 
-      <nav class="social">
-        <a href="https://www.facebook.com/Meedee.Indi/?locale=th_TH" target="_blank" rel="noopener">
-          <img src="Logo.facebook.png" alt="Facebook">
-        </a>
-        <a href="https://lin.ee/W2zLQNh" target="_blank" rel="noopener">
-          <img src="Logo.line.png" alt="LINE">
-        </a>
-        <a href="https://www.tiktok.com/@supphawat1499?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
-          <img src="Logo.tiktok.png" alt="TikTok">
-        </a>
-        <a href="https://youtube.com/@ldline-bank.w1994?si=Lv0UoDxSkO3xk31P" target="_blank" rel="noopener">
-          <img src="Logo.youtube.png" alt="YouTube">
-        </a>
-      </nav>
-    </header>
+            <!-- Main Button -->
+            <div class="main-button">📊 Trading Indicators</div>
 
-    <!-- FEATURED: รูปใหญ่เรียงลงมา + คลิกเด้งลิงก์ -->
-    <section class="featured">
-  <img src="QRsignal-free.png" alt="สแกนเข้าห้องสัญญาณฟรี" loading="lazy" style="display:block; width:100%; height:auto; margin:0 0 16px; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.25);">
-  <img src="Admin.png" alt="ติดต่อแอดมิน" loading="lazy" style="display:block; width:100%; height:auto; margin:0 0 16px; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.25);">
+            <!-- Section Title -->
+            <div class="section-title">📈 Free Trading Resources 📈</div>
 
-  <a href="https://www.facebook.com/groups/irtgold" target="_blank" rel="noopener">
-    <img src="course-private.png" alt="คอร์สเรียนส่วนตัว (Private Course)" loading="lazy">
-  </a>
-  <a href="https://www.facebook.com/groups/irtgold" target="_blank" rel="noopener">
-    <img src="signal-free.png" alt="รับสัญญาณ SIGNAL ฟรี" loading="lazy">
-  </a>
-  <a href="https://www.facebook.com/groups/irtgold" target="_blank" rel="noopener">
-    <img src="irt-gold-program.png" alt="IRT GOLD Program" loading="lazy">
-  </a>
-</section>
+            <!-- Content Box with Image Placeholder -->
+            <div class="content-box">
+                <div class="content-image">
+                    💎
+                </div>
+            </div>
 
-    <!-- CONTENT: 3 กล่องเรียงลงมา -->
-    <main class="grid">
-      <section class="section">
-        <h3>บริการหลัก</h3>
-        <ul>
-          <li>คอร์สเรียนเทรดส่วนตัว (Private) และ สอนเป็นกลุ่ม 2-5 ท่าน </li>
-          <li>โปรแกรม IRT GOLD วิเคราะห์แนวรับ–แนวต้านอัตโนมัติ</li>
-          <li>สัญญาณ BUY / SELL แบบ Realtime</li>
-          <li>ที่ปรึกษาวางแผนการเทรดและจิตวิทยาการลงทุน</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h3>ประวัติและผลงาน</h3>
-        <p>โค้ชแบงค์ ศุภวัสส์ ผู้ก่อตั้ง IRT GOLD และผู้สอนคอร์สการเทรดกว่า 500+ คน มีประสบการณ์เทรดตลาด Forex และทองคำมากกว่า 8 ปี พร้อมพัฒนาซอฟต์แวร์ช่วยวิเคราะห์กราฟอย่างแม่นยำ</p>
-      </section>
-
-      <section class="section">
-        <h3>ติดต่อ</h3>
-        <p>📍 Udon Thani, Thailand</p>
-        <p>📞 065-534-9456</p>
-        <p>✉️ irtgold18@gmail.com</p>
-        <p>💬 Groups FB : <a href="https://www.facebook.com/groups/irtgold" target="_blank" rel="noopener">IRT GOLD</a></p>
-      </section>
-    </main>
-
-    <footer>© 2025 สร้างจังหวะให้การเทรด – แบงค์ ศุภวัสส์</footer>
-  </div>
-
-  <!-- CTA BAR -->
-  <div class="cta-bar">
-    <a class="btn line" href="https://lin.ee/W2zLQNh" target="_blank" rel="noopener">ทักหาแอดมิน LINE</a>
-    <a class="btn phone" href="tel:0655349456">โทรเลย</a>
-  </div>
+            <!-- Link Button -->
+            <div class="link-button">🎁 รับ Free Signals</div>
+        </div>
+    </div>
 </body>
 </html>
